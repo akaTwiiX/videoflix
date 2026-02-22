@@ -195,7 +195,8 @@ USE_TZ = True
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_ROOT = '/root/projects/videoflix/media'
 MEDIA_URL = '/api/media/'
-STATIC_ROOT = '/root/projects/videoflix/static'
+# STATIC_ROOT = '/root/projects/videoflix/static'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/api/static/'
 
 # Default primary key field type

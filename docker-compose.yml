@@ -40,6 +40,9 @@ services:
       - EMAIL_PASSWORD=${EMAIL_PASSWORD}
 #    ports:
 #      - "8060:8000"
+    volumes:
+      - videoflix_media:/app/media
+      - videoflix_static:/app/static
     depends_on:
       - videoflix-db
       - videoflix-redis
@@ -68,3 +71,5 @@ networks:
 
 volumes:
   postgres_data:
+  videoflix_media:
+  videoflix_static:
