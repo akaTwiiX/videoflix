@@ -10,7 +10,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql
     networks:
-      - videoflix-network
+      - net-videoflix-internal
 
   videoflix-redis:
     image: bitnami/redis:latest
@@ -21,7 +21,7 @@ services:
 #    ports:
 #      - "6379:6379"
     networks:
-      - videoflix-network
+      - net-videoflix-internal
 
   videoflix-backend:
     build:
@@ -44,8 +44,8 @@ services:
       - videoflix-db
       - videoflix-redis
     networks:
-      - videoflix-network
-      - webproxy
+      - net-videoflix-internal
+      - net-videoflix
 
   videoflix-frontend:
     build:
@@ -57,13 +57,13 @@ services:
     depends_on:
       - videoflix-backend
     networks:
-      - videoflix-network
-      - webproxy
+      - net-videoflix-internal
+      - net-videoflix
 
 networks:
-  videoflix-network:
+  net-videoflix-internal:
     driver: bridge
-  webproxy:
+  net-videoflix:
     external: true
 
 volumes:
