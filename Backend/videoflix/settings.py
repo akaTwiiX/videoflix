@@ -33,8 +33,28 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     '116.203.70.55',
-    'videoflix.johnfieweger.de'
+    'videoflix.johnfieweger.de',
+    'videoflix-backend',
+    'videoflix-backend:8000'
 ]
+
+# Wichtig für HTTPS-Verbindungen über einen Proxy
+CSRF_TRUSTED_ORIGINS = [
+    'https://videoflix.johnfieweger.de'
+]
+
+# Damit Django erkennt, dass NPM bereits SSL (HTTPS) für uns macht
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Erlaube explizit die Kommunikation über den Proxy
+USE_X_FORWARDED_HOST = True
+
+# --- SSL & Cookie Security ---
+CSRF_COOKIE_HTTPONLY = False  # Erlaubt Angular den Zugriff auf das CSRF-Token
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'Lax'
 
 CACHE_TTL = 60 * 15
 
@@ -63,7 +83,9 @@ EMAIL_PORT = 587  # Standard-Port for TLS - Gmail
 EMAIL_HOST_USER = env("EMAIL_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_PASSWORD")
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOWED_ORIGINS = [
+    "https://videoflix.johnfieweger.de",
+]
 # Application definition
 
 INSTALLED_APPS = [

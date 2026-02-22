@@ -17,10 +17,10 @@ RUN npx nx build videoflix --configuration=production
 FROM nginx:alpine
 
 # Copy the custom nginx configuration if exists, otherwise use default
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy the build output to Nginx's html directory
-COPY --from=build /app/dist/apps/videoflix /usr/share/nginx/html
+COPY --from=build /app/dist/apps/videoflix/browser /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
