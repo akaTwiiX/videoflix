@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  videoflix-db:
+    image: postgres:latest
+    container_name: videoflix-db
+    env_file: .env
+    environment:
+      POSTGRES_USER: ${DB_USER:-videoflix}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-videoflix_password}
+      POSTGRES_DB: ${DB_NAME:-videoflix}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - videoflix-network
+
+  videoflix-redis:
+    image: bitnami/redis:latest
+    container_name: videoflix-redis
+    env_file: .env
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-redis_password}
+    ports:
+      - "6379:6379"
+    networks:
+      - videoflix-network
+
+  videoflix-backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: videoflix-backend
+    env_file: .env
+    environment:
+      - DB_NAME=${DB_NAME:-videoflix}
+      - DB_USER=${DB_USER:-videoflix}
+      - DB_PASSWORD=${DB_PASSWORD:-videoflix_password}
+      - DB_HOST=videoflix-db
+      - DB_PORT=5432
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-redis_password}
+      - EMAIL_USER=${EMAIL_USER}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
+    ports:
+      - "8060:8000"
+    depends_on:
+      - videoflix-db
+      - videoflix-redis
+    networks:
+      - videoflix-network
+
+  videoflix-frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    container_name: videoflix-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - videoflix-backend
+    networks:
+      - videoflix-network
+
+networks:
+  videoflix-network:
+    driver: bridge
+
+volumes:
+  postgres_data:

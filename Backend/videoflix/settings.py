@@ -33,7 +33,7 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     '116.203.70.55',
-    'videoflixapi.johnfieweger.de'
+    'videoflix.johnfieweger.de'
 ]
 
 CACHE_TTL = 60 * 15
@@ -172,9 +172,9 @@ USE_TZ = True
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_ROOT = '/root/projects/videoflix/media'
-MEDIA_URL = '/videoflix/media/'
+MEDIA_URL = '/api/media/'
 STATIC_ROOT = '/root/projects/videoflix/static'
-STATIC_URL = '/videoflix/static/'
+STATIC_URL = '/api/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

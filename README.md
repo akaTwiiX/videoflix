@@ -1,74 +1,48 @@
 # Videoflix
 
-My little project is a Netflix Dummy. Thats have a FE NX Angular project, Django BE in a Docker Container, Postgresql und redis in a container.
+My little project is a Netflix Dummy. It features a Frontend built with NX and Angular, a Django Backend, and uses PostgreSQL and Redis.
 
-## Introduction
+## Getting Started
 
-1. pull the project
+The entire project is containerized and can be started easily with Docker Compose.
 
-    ```bash
-    git clone git@github.com:JohnTwiiX/videoflix.git
-    ```
+### Prerequisites
 
-1. build frontend
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
-    ```bash
-    npm i -g nx
-    cd Frontend
-    nx build videoflix # serve with nx serve videoflix
-    ```
+### Installation & Setup
 
-1. create network
+1. **Clone the repository**:
+   ```bash
+   git clone git@github.com:JohnTwiiX/videoflix.git
+   cd videoflix
+   ```
 
-    ```bash
-    docker network create <your-network>
-    ```
+2. **Configure environment variables**:
+   We use a `.env` file in the root directory for configuration. You can use the provided template:
+   ```bash
+   cp simple.env .env
+   ```
+   Open the newly created `.env` file and fill in your credentials (database, redis password, etc.).
 
-1. run postgres container
+3. **Start the application**:
+   Use Docker Compose to build and start all services (Frontend, Backend, DB, Redis):
+   ```bash
+   docker compose up --build -d
+   ```
 
-    ```bash
-    docker run &&\
-        --name <name> &&\
-        --network <your-network> &&\
-        -e POSTGRES_PASSWORD=<password> &&\
-        -e POSTGRES_USER=<user> &&\
-        -e POSTGRES_DB=<db-name> &&\
-        -d postgres 
-    ```
+### Accessing the services
 
-1. run redis container
+Once everything is up and running, you can access the services at the following URLs:
 
-    ```bash
-    docker run && \
-        -d && \
-        --name <name> && \
-        --network <your-network> && \
-        -e REDIS_PASSWORD=<password>
-        -p 6379:6379 && \
-        bitnami/redis:latest
-    ```
+- **Frontend**: [http://localhost:80](http://localhost:80)
+- **Backend API**: [https://videoflix.johnfieweger.de/api](https://videoflix.johnfieweger.de/api)
+- **Django Admin**: [https://videoflix.johnfieweger.de/api/admin](https://videoflix.johnfieweger.de/api/admin)
 
-1. create your .env
+## Project Structure
 
-    ```bash
-    cd Backend/videoflix
-    cp simple.env .env
-    ```
-
-1. build docker image
-
-    ```bash
-    cd Backend
-    docker build -t videoflix:0.0.0.1 .
-    ```
-
-1. run your backend container
-
-    ```bash
-    docker run && \
-        --name <name> && \
-        --network <your-network> && \
-        -p <your-port>:8000 && \
-        --restart on-failure && \
-        <your-image> 
-    ```
+- `Frontend/`: Angular application managed with NX.
+- `Backend/`: Django REST API.
+- `docker-compose.yml`: Central orchestration for all services.
+- `simple.env`: Template for environment variables.

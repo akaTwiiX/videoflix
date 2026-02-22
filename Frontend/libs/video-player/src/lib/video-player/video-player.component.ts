@@ -37,7 +37,7 @@ import { Location } from '@angular/common';
       autoplay
       loop
     >
-      <source *ngIf="specificVideo" [src]="'https://videoflixapi.johnfieweger.de'+videoSource" type="video/mp4" />
+      <source *ngIf="specificVideo" [src]="'https://videoflix.johnfieweger.de'+videoSource" type="video/mp4" />
       Ihr Browser unterstützt das Video-Tag nicht.
     </video>
     <select
@@ -69,7 +69,7 @@ export class VideoPlayerComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private cdRef: ChangeDetectorRef
-  ) {}
+  ) { }
 
   async ngOnInit() {
     const routeId = this.route.snapshot.paramMap.get('id');
@@ -89,7 +89,7 @@ export class VideoPlayerComponent implements OnInit {
 
   changeQuality(event: any) {
     const videoElement: HTMLVideoElement = this.myVideo.nativeElement;
-    videoElement.src = 'https://videoflixapi.johnfieweger.de'+event.target.value;
+    videoElement.src = 'https://videoflix.johnfieweger.de' + event.target.value;
     videoElement.load();
     videoElement.play();
   }

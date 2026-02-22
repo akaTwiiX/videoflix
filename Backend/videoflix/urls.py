@@ -27,7 +27,7 @@ router = routers.DefaultRouter()
 router.register(r'videos', VideoViewSet)
 
 urlpatterns = [
-    path('videoflix/', include([
+    path('api/', include([
         path('', include(router.urls)),
         path('admin/', admin.site.urls),
         path('django-rq/', include('django_rq.urls')),

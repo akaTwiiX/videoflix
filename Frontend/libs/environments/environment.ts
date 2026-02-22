@@ -1,5 +1,5 @@
 export const environment = {
   // production: false,
-  baseUrl: 'https://videoflixapi.johnfieweger.de/videoflix',
+  baseUrl: 'https://videoflix.johnfieweger.de/api',
   // baseUrl: 'http://localhost:8000/videoflix',
 };

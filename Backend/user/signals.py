@@ -13,7 +13,7 @@ def user_post_save(sender, instance, created, **kwargs):
 Your registration at VideoFlix was successful.
 To activate your account and gain access, please click on the following link:
 
-# https://videoflix.johnfieweger.de/register-confirmation/{instance.pk}
+https://videoflix.johnfieweger.de/register-confirmation/{instance.pk}
 # http://localhost:4200/register-confirmation/{instance.pk}
 
 Please note that this link is valid only once and must be activated within 24 hours of receiving this email.
