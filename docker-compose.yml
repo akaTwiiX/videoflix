@@ -2,6 +2,7 @@ services:
   videoflix-db:
     image: postgres:latest
     container_name: videoflix-db
+    restart: unless-stopped
     env_file: .env
     environment:
       POSTGRES_USER: ${DB_USER:-videoflix}
@@ -15,6 +16,7 @@ services:
   videoflix-redis:
     image: bitnami/redis:latest
     container_name: videoflix-redis
+    restart: unless-stopped
     env_file: .env
     environment:
       - REDIS_PASSWORD=${REDIS_PASSWORD:-redis_password}
@@ -28,6 +30,7 @@ services:
       context: ./Backend
       dockerfile: Dockerfile
     container_name: videoflix-backend
+    restart: unless-stopped
     env_file: .env
     environment:
       - DB_NAME=${DB_NAME:-videoflix}
@@ -55,6 +58,7 @@ services:
       context: ./Frontend
       dockerfile: Dockerfile
     container_name: videoflix-frontend
+    restart: unless-stopped
 #    ports:
 #      - "80:80"
     depends_on:
