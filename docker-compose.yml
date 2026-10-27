@@ -14,7 +14,7 @@ services:
       - net-videoflix-internal
 
   videoflix-redis:
-    image: bitnami/redis:latest
+    image: soldevelo/redis:latest
     container_name: videoflix-redis
     restart: unless-stopped
     env_file: .env
